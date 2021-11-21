@@ -95,7 +95,12 @@ public class Badge extends JFrame implements ActionListener {
 
         if (source == showall)
         {
-            Showall showall=new Showall();
+            Showall showall= null;
+            try {
+                showall = new Showall();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             showall.setVisible(true);
         }
         else if (source == verify) {

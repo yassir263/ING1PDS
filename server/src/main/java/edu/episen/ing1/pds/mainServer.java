@@ -15,32 +15,33 @@ public class mainServer {
     private final static Logger logger = LoggerFactory.getLogger("Run Server");
     private static Socket socketClient;
 
-    private static void constructOutputStream(Socket socket, String message) throws IOException, InterruptedException {
+    private static void constructOutputStream(Socket socket, Object message) throws IOException, InterruptedException {
         PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
-        logger.info(message);
+        //logger.info(message);
         out.println(message);
         logger.info("message envoyé");
     }
 
     private static void analyseInputStream(Socket socket, Request req){
-        String result = "";
+        Object result = null;
         try {
             JBDCconnection conn = new JBDCconnection();
             conn.addNewConnection();
             ConnectionCrud connCrud = new ConnectionCrud();
             connCrud.setConnection(conn.getConnections().get(conn.getConnections().size()-1));
 
+
             switch (req.getNameRequest()){
                 case "getBadgesId" : result = connCrud .getBadgesId();
+                break;
+                case "getEmployee" : result = connCrud .getEmployee();
                 break;
                 default: result = "No data found";
 
             }
-            switch (req.getNameRequest()){
-                case "getEmployee" : result = connCrud .getEmployee();
-                break;
-                default: result = "Can't add";
-            }
+
+
+
             constructOutputStream(socket, result);
             socket.close();
             conn.closeAllConnections();

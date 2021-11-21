@@ -1,9 +1,11 @@
 package edu.episen.ing1.pds.server.databaseconnection;
 
+import edu.episen.ing1.pds.server.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ConnectionCrud {
     private Connection connection;
@@ -33,17 +35,23 @@ public class ConnectionCrud {
 
     }
 
-    public String getEmployee() throws SQLException {
+    public Object getEmployee() throws SQLException {
+        ArrayList<Employee> emps = new ArrayList<Employee>();
+
         String sql = "Select * from public.\"employee\";";
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         StringBuilder result = new StringBuilder();
         while (rs.next()) {
-            result.append(rs.getArray("id_employee")).append(rs.getArray("name")).append(rs.getArray("accesscard")).append("\n");
+            result.append("\n").append(rs.getArray("id_employee"));
+            emps.add(new Employee(rs.getInt("id_employee"),rs.getString("name"),rs.getInt("accesscard")));
+
 
 
         }
-        return result.toString();
+
+
+        return emps;
 
     }
 

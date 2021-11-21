@@ -1,7 +1,11 @@
 package edu.episen.ing1.pds;
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import edu.episen.ing1.pds.model.Employee;
 import edu.episen.ing1.pds.socketconfiguration.socketConnection;
 import org.apache.log4j.Logger;
 
@@ -21,6 +25,8 @@ public class ClientToServer {
         out.println(request);
         in = new BufferedReader(new InputStreamReader(client.getInputStream()));
         String responseString = responseString = in.readLine();
+        Gson g = new Gson();
+        //ArrayList<Employee> emps = g.fromJson(responseString, ArrayList<Request.class>);
         logger.info("responseString : " + responseString);
         req.setData(responseString);
         this.close();
