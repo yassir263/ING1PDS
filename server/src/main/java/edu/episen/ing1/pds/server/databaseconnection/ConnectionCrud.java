@@ -1,5 +1,6 @@
 package edu.episen.ing1.pds.server.databaseconnection;
 
+import edu.episen.ing1.pds.server.model.Card;
 import edu.episen.ing1.pds.server.model.Employee;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,15 +24,17 @@ public class ConnectionCrud {
     }
 
 
-    public String getBadgesId() throws SQLException {
-        String sql = "Select * from public.\"Badges\";";
+    public Object getBadges() throws SQLException {
+        ArrayList<Card> cards = new ArrayList<Card>();
+        String sql = "Select * from public.\"accesscard\";";
         Statement stmt = connection.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
-        String result = "";
+        StringBuilder result = new StringBuilder();
         while (rs.next()) {
-            result += rs.getArray("id") + "\n";
+            result.append("\n").append(rs.getArray("id"));
+            cards.add(new Card(rs.getInt("id"),rs.getInt("permission_level")));
         }
-        return result;
+        return cards;
 
     }
 

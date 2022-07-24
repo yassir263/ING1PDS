@@ -2,6 +2,7 @@ package edu.episen.ing1.pds.view;
 
 
 import javax.swing.* ;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,9 @@ public class Badge extends JFrame implements ActionListener {
     JButton verify;
     JButton infos;
     String companyName;
+
+    JTextComponent num1;
+    JTextComponent name1;
 
     public Badge(String companyName) {
         this.companyName=companyName;
@@ -26,13 +30,12 @@ public class Badge extends JFrame implements ActionListener {
         JPanel fenetre=new JPanel();
 
 
-        JLabel search;
+
         JLabel num;
         JLabel name;
-        JTextField num1 = new JTextField() ;
-        num1.setPreferredSize(new Dimension(100,20));
-        JTextField name1=new JTextField() ;
-        name1.setPreferredSize(new Dimension(100,20));
+
+
+
 
          
         showall=new JButton("Afficher toute la liste");
@@ -50,25 +53,17 @@ public class Badge extends JFrame implements ActionListener {
 
 
 
-        num=new JLabel("Numéro de badge");
 
-        recherche.add(num);
-        recherche.add(num1);
-
-
-        name=new JLabel("Nom de l'employé");
-
-        nume.add(name);
-        nume.add(name1);
 
 
 
 
 
         fenetre.setLayout(new BoxLayout(fenetre, BoxLayout.PAGE_AXIS));
-        search=new JLabel("Recherche");
-        show=new JButton("Afficher résultat");
-        fenetre.add(search);
+
+        show=new JButton("Chercher");
+        show.addActionListener(this);
+
         fenetre.add(recherche);
         fenetre.add(nume);
         fenetre.add(show);
@@ -84,16 +79,15 @@ public class Badge extends JFrame implements ActionListener {
 
         Badge badge = new Badge("Fritel Inc.");
     }
+    //public void Showall();{
+      //  connection con = new connectionc ;
 
+    //}
     @Override
     public void actionPerformed(ActionEvent evt) {
         Object source =evt.getSource();
-        if (source == show)
-        {
-            Show show = new Show();
-        }
 
-        if (source == showall)
+         if (source == showall)
         {
             Showall showall= null;
             try {
@@ -103,6 +97,21 @@ public class Badge extends JFrame implements ActionListener {
             }
             showall.setVisible(true);
         }
+       else if (source == show)
+        {
+            Show show = null;
+            try {
+                show = new Show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            show.setVisible(true);
+        }
+
+
+
+
+
         else if (source == verify) {
             Verify  verif = new Verify() ;
         }
@@ -112,7 +121,12 @@ public class Badge extends JFrame implements ActionListener {
         }
         else if(source == infos)
         {
-            Information info = new Information();
+            Information info = null;
+            try {
+                info = new Information();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             info.setVisible(true);
         }
 
@@ -120,4 +134,5 @@ public class Badge extends JFrame implements ActionListener {
     }
 
 
-    }
+
+}

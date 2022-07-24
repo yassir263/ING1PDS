@@ -1,61 +1,67 @@
 package edu.episen.ing1.pds.view;
 
+import edu.episen.ing1.pds.ClientToServer;
+import edu.episen.ing1.pds.Request;
+import org.apache.log4j.BasicConfigurator;
+
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 
-public class Show extends JFrame  {
-    JButton prec;
-    JButton modif1;
 
-    public Show() {
+public class Show extends JFrame {
+    JButton show;
+    String txt;
+    String txt1;
+    public Show() throws Exception {
+        super();
         this.setTitle("OneBuilding");
-        this.setSize(500, 300);
-        this.setLocationRelativeTo(null);
+        this.setSize(600, 300);
+        JPanel fenetre=new JPanel();
+        JPanel recherche=new JPanel();
+        JPanel nume=new JPanel();
+        JLabel search;
+        JLabel num;
+        JLabel name;
+        JTextComponent num1 = new JTextArea() ;
+        num1.setPreferredSize(new Dimension(100,20));
 
-        JPanel num = new JPanel();
-        num.add(new JLabel("Numéro de badge:"));
-        num.add(new JLabel("A12A"));
+        txt = "ouria";
+        txt1="wayle";
 
+        JTextComponent name1=new JTextArea()  ;
+        name1.setPreferredSize(new Dimension(100,20));
+        num=new JLabel("Numéro de badge");
 
-        JPanel num1 = new JPanel();
-        num1.add(new JLabel("Propriétaire du badge:"));
-        num1.add(new JLabel("Paul Denis"));
-
-
-        JPanel num2 = new JPanel();
-        num2.add(new JLabel("Niveau d'accès:"));
-        num2.add(new JLabel("2"));
-
-
-        JPanel num3 = new JPanel();
-        num3.add(new JLabel("Statut:"));
-        num3.add(new JLabel("Actif"));
-
-        JPanel num4 = new JPanel();
-        num4.setLayout(new BoxLayout(num4, BoxLayout.PAGE_AXIS));
-        prec=new JButton("Précedent");
-        modif1=new JButton("Modifier niveau d'accès");
-
-        num4.add(modif1);
-        num4.add(prec);
+        recherche.add(num);
+        recherche.add(num1);
 
 
+        name=new JLabel("Nom de l'employé");
 
+        nume.add(name);
+        nume.add(name1);
+        search=new JLabel("Recherche");
+        show=new JButton("Chercher");
 
-
-        JPanel fenetre = new JPanel();
         fenetre.setLayout(new BoxLayout(fenetre, BoxLayout.PAGE_AXIS));
-        fenetre.add(num);
-        fenetre.add(num1);
-        fenetre.add(num2);
-        fenetre.add(num3);
-        fenetre.add(num4);
-
+        fenetre.add(search);
+        fenetre.add(recherche);
+        fenetre.add(nume);
+        fenetre.add(show);
 
         this.getContentPane().add(fenetre);
         this.setVisible(true);
+
+
     }
 
-    public static void main(String[] args) {
-        Show affiche = new Show();
+    public static void main(String[] args) throws Exception {
+
+        Show show = new Show();
+        new Show().setVisible(true);
     }
 }

@@ -32,7 +32,7 @@ public class mainServer {
 
 
             switch (req.getNameRequest()){
-                case "getBadgesId" : result = connCrud .getBadgesId();
+                case "getBadgesId" : result = connCrud .getBadges();
                 break;
                 case "getEmployee" : result = connCrud .getEmployee();
                 break;

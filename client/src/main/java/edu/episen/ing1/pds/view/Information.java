@@ -1,32 +1,28 @@
 package edu.episen.ing1.pds.view;
 
+import edu.episen.ing1.pds.ClientToServer;
+import edu.episen.ing1.pds.Request;
+import org.apache.log4j.BasicConfigurator;
+
 import javax.swing.*;
+import java.io.IOException;
 
 public class Information extends JFrame {
 
-    public Information() {
+    public Information() throws Exception {
         this.setTitle("OneBuilding");
         this.setSize(900, 300);
-        this.setLocationRelativeTo(null);
-        JButton modif = new JButton("Modifier");
+        BasicConfigurator.configure();
+        ClientToServer ctv = new ClientToServer();
+        ctv.clientListen();
+        Request req = new Request("getBadgesId");
 
-        JPanel fenetre = new JPanel();
-
-        JLabel niveau1 = new JLabel("Le niveau d'accès 1 : la possibilté d'accéder au batiemnt , aux salles réserves munis de l'électricité et d'une connexion Internet dans tout le batiment. "
-        );
-        JLabel niveau2 = new JLabel("Le niveau d'accès 2 : toutes les possibilités du niveau d'accès 1 en plus d'une connexion Ethernet,et aux capteurs... ");
-        JLabel niveau3 = new JLabel("Le niveau d'accès 3 : accès total aux salles et leurs fonctionnalités.");
-        fenetre.add(niveau1);
-        fenetre.add(niveau2);
-        fenetre.add(niveau3);
-        fenetre.add(modif);
-
-
-        this.getContentPane().add(fenetre);
+        req = ctv.sendRequest(req);
+        System.out.println(req);
 
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Information  info = new Information();
         info.setVisible(true);
         }

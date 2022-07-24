@@ -1,36 +1,27 @@
 package edu.episen.ing1.pds.view;
+import edu.episen.ing1.pds.ClientToServer;
+import edu.episen.ing1.pds.Request;
+import org.apache.log4j.BasicConfigurator;
+
 import javax.swing.*;
+import javax.swing.table.TableModel;
 import java.awt.*;
+import java.io.IOException;
 
 public class Showall extends JFrame {
-    public Showall() {
+    public Showall() throws Exception {
         super();
 
         setTitle("OneBuilding");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Object[][] donnees = {
-                {"A12A", "Paul Denis", "2","Actif"},
-                {"A13A", "Robert Duval", "1", "Actif"},
-                {"A14B", "Bob Hubert  ", "2", "Actif"},
-                {"A15C", "Anna Sanchez", "1", "Actif"},
-                {"B251", "Sara Moulin", "3", "Actif"},
+        BasicConfigurator.configure();
+        ClientToServer ctv = new ClientToServer();
+        ctv.clientListen();
+        Request req = new Request("getEmployee");
 
-        };
-
-        String[] entetes = {"Numéro Badge", "Employé", "Niveau d'accès", "Statut"};
-
-        JPanel tab = new JPanel();
-
-        JTable tableau = new JTable(donnees, entetes);
-
-        getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
-
-        JPanel boutons=new JPanel();
-
-        boutons.add(new JButton("Précedent"));
-
-        getContentPane().add(boutons, BorderLayout.SOUTH);
+        req = ctv.sendRequest(req);
+        System.out.println(req);
 
 
 
@@ -38,11 +29,17 @@ public class Showall extends JFrame {
 
 
 
-        pack();
+
+
+
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         new Showall().setVisible(true);
 
+
+
     }
-}
+
+    }
+
