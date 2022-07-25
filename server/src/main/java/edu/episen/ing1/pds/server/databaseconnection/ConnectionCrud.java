@@ -2,6 +2,7 @@ package edu.episen.ing1.pds.server.databaseconnection;
 
 import edu.episen.ing1.pds.server.model.Card;
 import edu.episen.ing1.pds.server.model.Employee;
+import edu.episen.ing1.pds.view.Problem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +11,10 @@ import java.util.ArrayList;
 
 public class ConnectionCrud {
     private Connection connection;
+
+
     private final static Logger logger = LoggerFactory.getLogger(ConnectionCrud.class.getName());
+
 
     public ConnectionCrud() {
     }
@@ -56,6 +60,13 @@ public class ConnectionCrud {
 
         return emps;
 
+    }
+    public void addProblem( Object value) throws SQLException {
+
+
+        String sql = "INSERT INTO problems (msg) VALUES ('"+value+" ');";
+        Statement smt = connection.createStatement();
+        smt.executeQuery(sql);
     }
 
 

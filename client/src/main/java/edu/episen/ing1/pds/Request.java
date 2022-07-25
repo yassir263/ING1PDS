@@ -4,6 +4,7 @@ public class Request {
 
     private String nameRequest;
     private Object data;
+    private Object sendingdata;
 
     public String getNameRequest() {
         return nameRequest;
@@ -21,9 +22,11 @@ public class Request {
 
     }
 
+
     public Request(String name) {
         this.nameRequest = name;
     }
+
 
     public void setData(Object data) {
         this.data = data;

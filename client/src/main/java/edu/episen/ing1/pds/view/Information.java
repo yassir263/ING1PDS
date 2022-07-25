@@ -15,7 +15,7 @@ public class Information extends JFrame {
         BasicConfigurator.configure();
         ClientToServer ctv = new ClientToServer();
         ctv.clientListen();
-        Request req = new Request("getBadgesId");
+        Request req = new Request("getBadges");
 
         req = ctv.sendRequest(req);
         System.out.println(req);

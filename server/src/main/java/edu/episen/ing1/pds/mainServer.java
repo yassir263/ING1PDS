@@ -7,13 +7,21 @@ import edu.episen.ing1.pds.server.databaseconnection.ConnectionCrud;
 import edu.episen.ing1.pds.server.databaseconnection.JBDCconnection;
 import edu.episen.ing1.pds.server.databaseconnection.Request;
 import edu.episen.ing1.pds.server.serverconfiguration.serverConfig;
+import edu.episen.ing1.pds.view.Problem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.sql.Connection;
+import org.w3c.dom.Text;
 
 public class mainServer {
     private final static Logger logger = LoggerFactory.getLogger("Run Server");
     private static Socket socketClient;
+
+
+
+
+
+
+
 
     private static void constructOutputStream(Socket socket, Object message) throws IOException, InterruptedException {
         PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
@@ -24,6 +32,16 @@ public class mainServer {
 
     private static void analyseInputStream(Socket socket, Request req){
         Object result = null;
+
+
+
+
+
+
+
+
+
+
         try {
             JBDCconnection conn = new JBDCconnection();
             conn.addNewConnection();
@@ -31,10 +49,19 @@ public class mainServer {
             connCrud.setConnection(conn.getConnections().get(conn.getConnections().size()-1));
 
 
+
             switch (req.getNameRequest()){
-                case "getBadgesId" : result = connCrud .getBadges();
+                case "getBadges" : result = connCrud .getBadges();
                 break;
                 case "getEmployee" : result = connCrud .getEmployee();
+                break;
+                case "addProblem" :
+
+                connCrud .addProblem("hhh");
+
+
+
+
                 break;
                 default: result = "No data found";
 
@@ -51,6 +78,8 @@ public class mainServer {
             System.out.println(e.getMessage());
         }
     }
+
+
 
     private static Request getRequest(Socket socket) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));

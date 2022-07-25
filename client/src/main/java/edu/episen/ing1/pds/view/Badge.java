@@ -116,8 +116,13 @@ public class Badge extends JFrame implements ActionListener {
             Verify  verif = new Verify() ;
         }
         else if(source == signal) {
-            Problem prob = new Problem();
-            prob.setVisible(true);
+             Problem prob = null;
+             try {
+                 prob = new Problem();
+             } catch (Exception e) {
+                 e.printStackTrace();
+             }
+             prob.setVisible(true);
         }
         else if(source == infos)
         {
